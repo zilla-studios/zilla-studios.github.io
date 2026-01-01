@@ -5,7 +5,10 @@
     <title>Zilla Studios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Font -->
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
@@ -17,132 +20,220 @@
         }
 
         body {
-            min-height: 100vh;
-            background: radial-gradient(circle at top, #001a00, #000);
-            color: #00ff88;
+            background: #000;
+            color: #fff;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            width: 100%;
+            height: 70px;
+            background: #0d0d0d;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid #1a1a1a;
         }
 
-        h1 {
-            font-size: 3rem;
-            text-shadow: 0 0 15px #00ff88, 0 0 40px #00ff88;
-            margin-bottom: 10px;
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .subtitle {
-            color: #66ffbb;
-            opacity: 0.8;
-            margin-bottom: 50px;
+        .nav-left img {
+            height: 42px;
+        }
+
+        .nav-left span {
+            font-size: 22px;
+            font-weight: 800;
             letter-spacing: 2px;
         }
 
+        .nav-center {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-center a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .nav-center a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: #00ff66;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #00ff66;
+        }
+
+        .nav-center a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right a {
+            padding: 10px 20px;
+            background: #00ff66;
+            color: #000;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: 0 0 15px #00ff66;
+            transition: 0.3s;
+        }
+
+        .nav-right a:hover {
+            box-shadow: 0 0 30px #00ff66;
+            transform: scale(1.05);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            text-shadow: 0 0 20px #00ff66;
+        }
+
+        .hero p {
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        /* ===== BUTTON GRID ===== */
         .grid {
+            width: 900px;
+            max-width: 90%;
+            margin: 80px auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            width: 90%;
-            max-width: 900px;
         }
 
         .card {
-            background: rgba(0, 255, 136, 0.05);
-            border: 2px solid #00ff88;
-            border-radius: 16px;
-            padding: 30px 20px;
+            background: #0b0b0b;
+            border: 1px solid #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
             text-align: center;
             text-decoration: none;
-            color: #00ff88;
+            color: #fff;
+            transition: 0.3s;
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
         }
 
         .card::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(120deg, transparent, rgba(0,255,136,0.3), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 0 0px #00ff66;
+            transition: 0.3s;
         }
 
         .card:hover::before {
-            opacity: 1;
+            box-shadow: 0 0 25px #00ff66;
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow:
-                0 0 20px #00ff88,
-                0 0 40px rgba(0,255,136,0.6),
-                inset 0 0 20px rgba(0,255,136,0.3);
+            transform: translateY(-8px) scale(1.02);
         }
 
         .card h2 {
-            font-size: 1.4rem;
+            font-size: 22px;
             margin-bottom: 10px;
         }
 
         .card p {
-            font-size: 0.85rem;
-            color: #99ffcc;
-            opacity: 0.9;
+            font-size: 14px;
+            color: #aaa;
         }
 
-        footer {
-            margin-top: 60px;
-            font-size: 0.75rem;
-            opacity: 0.4;
-        }
-
-        @media (max-width: 768px) {
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
             .grid {
                 grid-template-columns: 1fr;
+            }
+
+            .nav-center {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <h1>ZILLA STUDIOS</h1>
-    <div class="subtitle">digital chaos • neon power • underground</div>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="logo.png" alt="Zilla Studios Logo">
+            <span>ZILLA STUDIOS</span>
+        </div>
 
-    <div class="grid">
+        <div class="nav-center">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="nav-right">
+            <a href="https://discord.gg/INVITE" target="_blank">Join Discord</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>ZILLA STUDIOS</h1>
+        <p>Digital power. Creative domination.</p>
+    </section>
+
+    <!-- BUTTONS -->
+    <section class="grid">
         <a href="page1.html" class="card">
-            <h2>Proiecte</h2>
-            <p>Lucrări, idei, experimente</p>
+            <h2>Button One</h2>
+            <p>First destination</p>
         </a>
 
         <a href="page2.html" class="card">
-            <h2>Servicii</h2>
-            <p>Ce știm să facem bine</p>
+            <h2>Button Two</h2>
+            <p>Second destination</p>
         </a>
 
         <a href="page3.html" class="card">
-            <h2>Studio</h2>
-            <p>Identitate & vibe</p>
+            <h2>Button Three</h2>
+            <p>Third destination</p>
         </a>
 
         <a href="page4.html" class="card">
-            <h2>Media</h2>
-            <p>Video, design, audio</p>
+            <h2>Button Four</h2>
+            <p>Fourth destination</p>
         </a>
 
         <a href="page5.html" class="card">
-            <h2>Contact</h2>
-            <p>Intră în legătură cu noi</p>
+            <h2>Button Five</h2>
+            <p>Fifth destination</p>
         </a>
 
         <a href="page6.html" class="card">
-            <h2>Extra</h2>
-            <p>Stuff ascuns 👀</p>
+            <h2>Button Six</h2>
+            <p>Sixth destination</p>
         </a>
-    </div>
-
-    <footer>© 2026 Zilla Studios</footer>
+    </section>
 
 </body>
 </html>
