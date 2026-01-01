@@ -1,239 +1,224 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <title>Zilla Studio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discord Status</title>
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
-    <!-- FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Orbitron', sans-serif;
-        }
+body {
+    min-height: 100vh;
+    background: linear-gradient(270deg, #0a0a0a, #141414, #1b1b1b);
+    background-size: 400% 400%;
+    animation: bgMove 15s ease infinite;
+    color: #e0e0e0;
+    overflow: hidden;
+}
 
-        body {
-            background: #000;
-            color: #fff;
-        }
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-        /* ===== NAVBAR ===== */
-        .navbar {
-            width: 100%;
-            height: 70px;
-            background: #0d0d0d;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            border-bottom: 1px solid #1a1a1a;
-        }
+/* Particule */
+canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
 
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+/* Layout principal */
+.main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100vh;
+    padding: 40px;
+}
 
-        .nav-left img {
-            height: 42px;
-        }
+/* STÂNGA – Discord */
+.left {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding-left: 70px;      /* mai în dreapta */
+    padding-bottom: 120px;  /* mai sus */
+}
 
-        .nav-left span {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
+.discord-box {
+    backdrop-filter: blur(20px);
+    background: rgba(18, 18, 18, 0.9);
+    border-radius: 26px;
+    padding: 18px;
+    box-shadow: 0 0 40px rgba(20, 120, 80, 0.65);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
 
-        .nav-center {
-            display: flex;
-            gap: 30px;
-        }
+.discord-box:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 65px rgba(31, 163, 106, 0.95);
+}
 
-        .nav-center a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 14px;
-            position: relative;
-        }
+/* DREAPTA – Text */
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 60px;
+}
 
-        .nav-center a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 0;
-            height: 2px;
-            background: #00ff66;
-            transition: 0.3s;
-            box-shadow: 0 0 10px #00ff66;
-        }
+.right h1 {
+    font-size: 46px;
+    margin-bottom: 22px;
+    color: #1fa36a;
+    text-shadow: 0 0 14px rgba(31, 163, 106, 0.55);
+}
 
-        .nav-center a:hover::after {
-            width: 100%;
-        }
+.right p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #c2c2c2;
+    max-width: 520px;
+}
 
-        .nav-right a {
-            padding: 10px 20px;
-            background: #00ff66;
-            color: #000;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            box-shadow: 0 0 15px #00ff66;
-            transition: 0.3s;
-        }
+/* Responsive */
+@media (max-width: 900px) {
+    .main {
+        flex-direction: column;
+    }
 
-        .nav-right a:hover {
-            box-shadow: 0 0 30px #00ff66;
-            transform: scale(1.05);
-        }
+    .left {
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 40px;
+    }
 
-        /* ===== HERO ===== */
-        .hero {
-            text-align: center;
-            margin-top: 80px;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            text-shadow: 0 0 20px #00ff66;
-        }
-
-        .hero p {
-            margin-top: 10px;
-            color: #aaa;
-            font-size: 16px;
-        }
-
-        /* ===== BUTTON GRID ===== */
-        .grid {
-            width: 900px;
-            max-width: 90%;
-            margin: 80px auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .card {
-            background: #0b0b0b;
-            border: 1px solid #1a1a1a;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            text-decoration: none;
-            color: #fff;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 12px;
-            box-shadow: 0 0 0px #00ff66;
-            transition: 0.3s;
-        }
-
-        .card:hover::before {
-            box-shadow: 0 0 25px #00ff66;
-        }
-
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-        }
-
-        .card h2 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: #aaa;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 700px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-center {
-                display: none;
-            }
-        }
-    </style>
+    .right {
+        padding-left: 0;
+        align-items: center;
+        text-align: center;
+    }
+}
+</style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <img src="logo.png" alt="Zilla Studios Logo">
-            <span>ZILLA STUDIOS</span>
+<canvas id="particles"></canvas>
+
+<div class="main">
+    <!-- STÂNGA -->
+    <div class="left">
+        <div class="discord-box">
+            <iframe 
+                src="https://discord.com/widget?id=1391374367782342656&theme=dark"
+                width="420"
+                height="600"
+                allowtransparency="true"
+                frameborder="0"
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+            </iframe>
         </div>
+    </div>
 
-        <div class="nav-center">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
-        </div>
+    <!-- DREAPTA -->
+    <div class="right">
+        <h1>SCRIE TITLUL AICI</h1>
+        <p>
+            Aici îți pui tu textul.<br><br>
+            Status, descriere, mesaj pentru server,
+            vibe personal, reguli, lore sau ce vrei tu.
+            Textul e liber, îl modifici direct din HTML.
+        </p>
+    </div>
+</div>
 
-        <div class="nav-right">
-            <a href="https://discord.gg/INVITE" target="_blank">Join Discord</a>
-        </div>
-    </nav>
+<script>
+/* Particule */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
 
-    <!-- HERO -->
-    <section class="hero">
-        <h1>ZILLA STUDIOS</h1>
-        <p>Digital power. Creative domination.</p>
-    </section>
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    <!-- BUTTONS -->
-    <section class="grid">
-        <a href="page1.html" class="card">
-            <h2>Button One</h2>
-            <p>First destination</p>
-        </a>
+let particles = [];
 
-        <a href="page2.html" class="card">
-            <h2>Button Two</h2>
-            <p>Second destination</p>
-        </a>
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.vx = Math.random() * 0.4 - 0.2;
+        this.vy = Math.random() * 0.4 - 0.2;
+    }
+    move() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    draw() {
+        ctx.fillStyle = 'rgba(31,163,106,0.35)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
 
-        <a href="page3.html" class="card">
-            <h2>Button Three</h2>
-            <p>Third destination</p>
-        </a>
+function init() {
+    particles = [];
+    for (let i = 0; i < 90; i++) {
+        particles.push(new Particle());
+    }
+}
 
-        <a href="page4.html" class="card">
-            <h2>Button Four</h2>
-            <p>Fourth destination</p>
-        </a>
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.move();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
 
-        <a href="page5.html" class="card">
-            <h2>Button Five</h2>
-            <p>Fifth destination</p>
-        </a>
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
 
-        <a href="page6.html" class="card">
-            <h2>Button Six</h2>
-            <p>Sixth destination</p>
-        </a>
-    </section>
+init();
+animate();
+</script>
+
+<!-- WIDGET BOT – CRATE -->
+<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3"></script>
+<script>
+  const crateInterval = setInterval(() => {
+    if (window.Crate) {
+      clearInterval(crateInterval);
+
+      new Crate({
+        server: '1391374367782342656',
+        color: '#1fa36a',
+        location: ['left', 'bottom'],
+        notifications: true
+      });
+    }
+  }, 100);
+</script>
+
 
 </body>
 </html>
