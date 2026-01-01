@@ -126,18 +126,18 @@
             result += map[lower] || char;
         }
 
-        document.getElementById("output").textContent = result || "n-ai scris nimic bro 😭";
+        document.getElementById("output").textContent = result || "Nu ai scris nimic...";
     }
 
     function copyText() {
         const text = document.getElementById("output").textContent;
         navigator.clipboard.writeText(text);
-        alert("COPIAT 💪 acum ești periculos");
+        alert("Text copiat!");
     }
 
     function clearAll() {
         document.getElementById("input").value = "";
-        document.getElementById("output").textContent = "gata, curat ca sufletu";
+        document.getElementById("output").textContent = "Text eliminat...";
     }
 </script>
 
