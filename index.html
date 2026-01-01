@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>🔥 SMALL CAPS GENERATOR 🔥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #1a1a1a, #000);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            width: 95%;
+            max-width: 700px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 25px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            border-radius: 15px;
+            border: none;
+            padding: 15px;
+            font-size: 1rem;
+            resize: vertical;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        .output {
+            background: #0d0d0d;
+            border-radius: 15px;
+            padding: 15px;
+            min-height: 100px;
+            font-size: 1.1rem;
+            word-wrap: break-word;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff0066, #ffcc00);
+            border: none;
+            border-radius: 999px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 200, 0, 0.6);
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>SMALL CAPS GENERATOR</h1>
+    <div class="subtitle">transformă textu banal în ceva ✨ artistic inutil ✨</div>
+
+    <textarea id="input" placeholder="scrie aici ca un muritor..."></textarea>
+
+    <div class="output" id="output">aici apare magia 👀</div>
+
+    <button onclick="generate()">🔥 GENEREAZĂ 🔥</button>
+    <button onclick="copyText()">📋 COPIAZĂ</button>
+    <button onclick="clearAll()">🧹 ȘTERGE TOT</button>
+
+    <div class="footer">
+        făcut la mișto • folosește responsabil • small caps supremacy
+    </div>
+</div>
+
+<script>
+    const map = {
+        a: "ᴀ", b: "ʙ", c: "ᴄ", d: "ᴅ", e: "ᴇ", f: "ғ",
+        g: "ɢ", h: "ʜ", i: "ɪ", j: "ᴊ", k: "ᴋ", l: "ʟ",
+        m: "ᴍ", n: "ɴ", o: "ᴏ", p: "ᴘ", q: "ǫ", r: "ʀ",
+        s: "s", t: "ᴛ", u: "ᴜ", v: "ᴠ", w: "ᴡ", x: "x",
+        y: "ʏ", z: "ᴢ"
+    };
+
+    function generate() {
+        const input = document.getElementById("input").value;
+        let result = "";
+
+        for (let char of input) {
+            const lower = char.toLowerCase();
+            result += map[lower] || char;
+        }
+
+        document.getElementById("output").textContent = result || "n-ai scris nimic bro 😭";
+    }
+
+    function copyText() {
+        const text = document.getElementById("output").textContent;
+        navigator.clipboard.writeText(text);
+        alert("COPIAT 💪 acum ești periculos");
+    }
+
+    function clearAll() {
+        document.getElementById("input").value = "";
+        document.getElementById("output").textContent = "gata, curat ca sufletu";
+    }
+</script>
+
+</body>
+</html>
