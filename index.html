@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Zilla Studios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #001a00, #000);
+            color: #00ff88;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 15px #00ff88, 0 0 40px #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #66ffbb;
+            opacity: 0.8;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 90%;
+            max-width: 900px;
+        }
+
+        .card {
+            background: rgba(0, 255, 136, 0.05);
+            border: 2px solid #00ff88;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #00ff88;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent, rgba(0,255,136,0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow:
+                0 0 20px #00ff88,
+                0 0 40px rgba(0,255,136,0.6),
+                inset 0 0 20px rgba(0,255,136,0.3);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 0.85rem;
+            color: #99ffcc;
+            opacity: 0.9;
+        }
+
+        footer {
+            margin-top: 60px;
+            font-size: 0.75rem;
+            opacity: 0.4;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ZILLA STUDIOS</h1>
+    <div class="subtitle">digital chaos • neon power • underground</div>
+
+    <div class="grid">
+        <a href="page1.html" class="card">
+            <h2>Proiecte</h2>
+            <p>Lucrări, idei, experimente</p>
+        </a>
+
+        <a href="page2.html" class="card">
+            <h2>Servicii</h2>
+            <p>Ce știm să facem bine</p>
+        </a>
+
+        <a href="page3.html" class="card">
+            <h2>Studio</h2>
+            <p>Identitate & vibe</p>
+        </a>
+
+        <a href="page4.html" class="card">
+            <h2>Media</h2>
+            <p>Video, design, audio</p>
+        </a>
+
+        <a href="page5.html" class="card">
+            <h2>Contact</h2>
+            <p>Intră în legătură cu noi</p>
+        </a>
+
+        <a href="page6.html" class="card">
+            <h2>Extra</h2>
+            <p>Stuff ascuns 👀</p>
+        </a>
+    </div>
+
+    <footer>© 2026 Zilla Studios</footer>
+
+</body>
+</html>
