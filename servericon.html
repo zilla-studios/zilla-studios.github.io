@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ZILLA STUDIOS | Minecraft Icon Converter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    
+* { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body {
+  background: url('text.png');
+  background-size: 165% 165%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+.container {
+  background: rgba(20, 20, 20, 0.95);
+  border-radius: 25px;
+  padding: 50px 40px;
+  width: 95%;
+  max-width: 500px;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+h1 {
+  font-size: 3rem;
+  letter-spacing: 3px;
+  margin: 0 0 10px 0;
+  background: linear-gradient(90deg, #35CF1F, #53854A);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.7;
+  margin-bottom: 25px;
+}
+#fileInput {
+  margin: 15px 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  width: 100%;
+  background: #222;
+  color: #fff;
+}
+#preview {
+  width: 128px;
+  height: 128px;
+  border-radius: 15px;
+  border: 2px solid #35CF1F;
+  display: none;
+  margin: 20px auto;
+}
+button, a {
+  background: linear-gradient(135deg, #35CF1F, #53854A);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 5px 0 5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+}
+button:hover, a:hover { 
+  transform: scale(1.05); 
+  box-shadow: 0 0 20px rgba(50, 255, 50, 0.8); 
+}
+#loading {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1rem;
+  opacity: 0.85;
+  height: 24px;
+}
+.footer {
+  margin-top: 30px;
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+#homeBtn {
+  background: #35CF1F;
+  color: #000;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: all 0.25s ease;
+}
+#homeBtn:hover {
+  box-shadow: 0 0 15px #35CF1F;
+  transform: scale(1.05);
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Minecraft Icon Converter</h1>
+    <div class="subtitle">Turn any picture into an icon for your Minecraft server!</div>
+
+    <input type="file" id="fileInput" accept="image/*">
+    <div id="loading"></div>
+    <canvas id="canvas" width="64" height="64" style="display:none;"></canvas>
+    <img id="preview" src="">
+
+    <button id="convertBtn"><i class="fa fa-image mr-1 text-blue-400"></i> Convert</button>
+    <a id="downloadBtn">Download Icon</a>
+    <button id="homeBtn" onclick="goHome()">Home</button>
+
+    <div class="footer">Zilla Studios | All rights reserved</div>
+</div>
+
+<script>
+const fileInput = document.getElementById('fileInput');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const preview = document.getElementById('preview');
+const downloadBtn = document.getElementById('downloadBtn');
+const loading = document.getElementById('loading');
+const convertBtn = document.getElementById('convertBtn');
+
+let selectedDataURL = null;
+
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        selectedDataURL = e.target.result; // save the dataURL directly
+        preview.style.display = 'none';
+        downloadBtn.style.display = 'none';
+        loading.textContent = 'Picture selected, press Convert.';
+    }
+    reader.readAsDataURL(file);
+});
+
+convertBtn.addEventListener('click', () => {
+    if (!selectedDataURL) {
+        alert('Please select a picture first!');
+        return;
+    }
+
+    loading.textContent = 'Converting...';
+    preview.style.display = 'none';
+    downloadBtn.style.display = 'none';
+
+    const img = new Image();
+    img.onload = function() {
+        setTimeout(() => {
+            ctx.clearRect(0, 0, 64, 64);
+            ctx.drawImage(img, 0, 0, 64, 64);
+            const dataURL = canvas.toDataURL('image/png');
+
+            preview.src = dataURL;
+            preview.style.display = 'block';
+
+            downloadBtn.href = dataURL;
+            downloadBtn.download = 'server-icon.png';
+            downloadBtn.style.display = 'inline-block';
+
+            loading.textContent = 'Picture has been converted!';
+        }, 3000);
+    }
+    img.src = selectedDataURL; // create image from dataURL
+});
+function goHome() {
+    window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
