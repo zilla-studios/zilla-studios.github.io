@@ -1,266 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zilla Studios | Tools</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="logo.png">
-</head>
-<body>
-    <div id="mainContent">
-    <nav class="navbar">
-        <div class="nav-left">
-            <img src="logo.png" alt="Zilla Studios Logo">
-            <span>ZILLA STUDIOS</span>
-        </div>
-        <div class="nav-center">
-            <a href="index.html"><i class="fa fa-home mr-1 text-blue-400"> </i> Home</a>
-            <a href="about.html"><i class="fa fa-info-circle mr-1 text-blue-400"> </i> About</a>
-            <a href="tools.html"><i class="fa fa-wrench glow font-weight-300"> </i> Tools</a>
-            <a href="contact.html"><i class="fa fa-envelope mr-1 text-blue-400"> </i> Contact</a>
-            <a href="portfolio.html"><i class="fa fa-briefcase mr-1 text-blue-400"> </i> Portfolio</a>
-        </div>
-        <div class="nav-right">
-            <a href="https://discord.gg/CEDVdU8Bcb" target="_blank">Join Discord</a>
-        </div>
-    </nav>
-
-    
-    <div class="hero">
-        <h1>Tools by Zilla Studios</h1>
-        <p>Useful tools created by Zilla Studios</p>
-    </div>
-
-    <section class="grid">
-        <a href="smallcaps.html" class="card">
-            <h2>Small Caps Generator</h2>
-            <p>Useful for other fonts</p>
-        </a>
-        <a href="servericon.html" class="card">
-            <h2>Minecraft Server Icon Converter</h2>
-            <p>Useful for Minecraft Server Developers</p>
-        </a>
-        <a href="statusdiscord.html" class="card">
-            <h2>See Discord Status!</h2>
-            <p>Zilla Studios Discord</p>
-        </a>
-        <a href="" class="card">
-            <h2>Soon!</h2>
-            <p>Coming soon!</p>
-        </a>
-        <a href="" class="card">
-            <h2>Soon!</h2>
-            <p>Coming soon!</p>
-        </a>
-        <a href="" class="card">
-            <h2>Soon!</h2>
-            <p>Coming soon!</p>
-        </a>
-    </section>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zilla Studios | Minecraft Server Icon</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
 body {
+    min-height: 100vh;
     background: url('text.png');
-    background-size: cover;
-    background-attachment: fixed;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    font-family: 'Orbitron', sans-serif;
+    background-size: 165% 165%;
+    color: #e0e0e0;
+    overflow: hidden;
 }
+@keyframes bgMove { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
+canvas { position: fixed; inset:0; z-index:0; }
 
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: #0d0d0d;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px; 
-    border-bottom: 1px solid #1a1a1a;
-    z-index: 1000;
-}
-
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.nav-left img {
-    height: 42px;
-}
-
-.nav-left span {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.nav-center {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-center a {
+a {
+    color: #1fa36a;
     text-decoration: none;
-    color: #fff;
-    font-size: 14px;
-    position: relative;
-    transition: color 0.3s;
 }
 
-.nav-center a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 2px;
-    background: #00ff66;
-    transition: 0.3s;
-    box-shadow: 0 0 10px #00ff66;
+a:hover {
+    text-decoration: underline;
 }
 
-.nav-center a:hover::after {
-    width: 100%;
-}
-
-.nav-center a:hover {
-    color: #00ff66;
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 0;
-}
-
-.nav-right a {
-    padding: 10px 20px;
-    background: #00ff66;
-    color: #000;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-    box-shadow: 0 0 15px #00ff66;
-    transition: 0.3s;
-    margin-right: 60px; 
-}
-
-.nav-right a:hover {
-    box-shadow: 0 0 30px #00ff66;
-    transform: scale(1.05);
-}
-
-@media (max-width: 700px) {
-    .nav-center {
-        display: none;
-    }
-   
-    .nav-right a {
-        margin-right: 15px;
-    }
-}
-
-.status-bar {
+.main { position: relative; z-index:1; display:flex; height:100vh; padding:40px; }
+.left { flex:1; display:flex; align-items:flex-start; justify-content:flex-start; padding-left:70px; padding-top:40px; }
+.discord-embed { border-radius:26px; overflow:hidden; box-shadow:0 0 40px rgba(20,120,80,0.65); width:420px; height:600px; }
+.right { flex:1; display:flex; flex-direction:column; justify-content:center; padding-left:60px; }
+.right h1 { font-size:46px; margin-bottom:22px; color:#1fa36a; text-shadow:0 0 14px rgba(31,163,106,0.55); }
+.right p { font-size:18px; line-height:1.8; color:#c2c2c2; max-width:520px; margin-bottom:20px; }
+.right img { max-width:300px; border-radius:20px; box-shadow:0 0 30px rgba(31,163,106,0.5); }
+#actionButton {
     position: fixed;
-    top: 70px;
-    width: 100%;
-    background-color: #292b29;
-    color: white;
-    padding: 8px 0;
-    text-align: center;
-    font-size: 0.9rem;
-    font-weight: bold;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #333333;
+    box-shadow: 0 0 20px rgba(31,163,106,0.7);
+    cursor: pointer;
     z-index: 999;
+    font-size: 28px;
 }
 
-.status-bar-text {
-    animation: move-status 15s infinite linear;
-    display: inline-block;
-    white-space: nowrap;
+#homeBtn {
+  background: #35CF1F;
+  color: #000;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: all 0.25s ease;
+}
+#homeBtn:hover {
+  box-shadow: 0 0 15px #35CF1F;
+  transform: scale(1.05);
 }
 
-@keyframes move-status {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+@media(max-width:900px){
+    .main{ flex-direction:column; }
+    .left{ justify-content:center; padding:0; margin-bottom:40px; }
+    .right{ padding-left:0; align-items:center; text-align:center; }
+    .right img { max-width:80%; }
 }
+</style>
+</head>
+<body>
 
-#mainContent {
-    padding-top: 110px; 
-}
+<canvas id="particles"></canvas>
 
-.hero { text-align:center; margin-top:20px; }
-.hero h1 { font-size:48px; font-weight:800; text-shadow:0 0 20px #717272; }
-.hero p { margin-top:10px; color:#aaa; font-size:16px; }
+<div class="main">
+    <div class="left">
+        <div class="discord-embed">
+            <iframe 
+                src="https://discord.com/widget?id=1391374367782342656&theme=dark"
+                width="100%" height="100%" allowtransparency="true" frameborder="0"
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+            </iframe>
+        </div>
+    </div>
 
-.grid {
-    width:900px;
-    max-width:90%;
-    margin:80px auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:30px;
-}
+    <div class="right">
+        <h1>ZILLA STUDIOS</h1>
+        <p>
+            This is the current status<br>
+            of the Zilla Studios Discord server. <br>
+            Join the discord server pressing <a href="https://discord.gg/zilla-studios">here</a>
+        </p>
+    </div>
+</div>
 
-.card {
-    background:#0b0b0b;
-    border:1px solid #1a1a1a;
-    padding:30px;
-    border-radius:12px;
-    text-align:center;
-    text-decoration:none;
-    color:#fff;
-    transition:0.3s;
-    position:relative;
-}
-.card::before {
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:12px;
-    box-shadow:0 0 0px #00ff66;
-    transition:0.3s;
-}
-.card:hover::before { box-shadow:0 0 25px #00ff66; }
-.card:hover { transform:translateY(-8px) scale(1.02); }
-.card h2 { font-size:22px; margin-bottom:10px; }
-.card p { font-size:14px; color:#aaa; }
 
-@media(max-width:700px){
-    .grid { grid-template-columns:1fr; }
-    .nav-center { display:none; }
+<script>
+function goHome() {
+    window.location.href = 'index.html';
 }
+</script>
 
-#loadingScreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #252525;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    transition: opacity 2s ease;
-}
-
-.loader {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-    </style>
 </body>
 </html>
