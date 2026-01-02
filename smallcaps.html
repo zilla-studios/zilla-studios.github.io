@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ZILLA STUDIOS | Small caps Generator</title>
+    <title>Zilla Studios | Small Caps Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
@@ -11,7 +11,8 @@
         }
 
         body {
-            background: radial-gradient(circle at top, #1a1a1a, #000);
+            background: url('text.png');
+            background-size: 165% 165%;
             color: #fff;
             display: flex;
             align-items: center;
@@ -93,15 +94,16 @@
 
 <div class="container">
     <h1>ZILLA STUDIOS</h1>
-    <div class="subtitle">Small caps generator</div>
+    <div class="subtitle">Small Caps Generator</div>
 
-    <textarea id="input" placeholder="Scrie aici textul..."></textarea>
+    <textarea id="input" placeholder="Type your text here..."></textarea>
 
-    <div class="output" id="output">Aici va aparea textul!</div>
+    <div class="output" id="output">Your text will appear here!</div>
 
-    <button onclick="generate()">Genereaza textul</button>
-    <button onclick="copyText()">Copiaza textul</button>
-    <button onclick="clearAll()">Sterge textul</button>
+    <button onclick="generate()">Generate Text</button>
+    <button onclick="copyText()">Copy Text</button>
+    <button onclick="clearAll()">Clear Text</button>
+    <button id="homeBtn" onclick="goHome()">Home</button>
 
     <div class="footer">
         Zilla Studios | All rights reserved
@@ -126,18 +128,22 @@
             result += map[lower] || char;
         }
 
-        document.getElementById("output").textContent = result || "Nu ai scris nimic...";
+        document.getElementById("output").textContent = result || "You haven't typed anything...";
     }
 
     function copyText() {
         const text = document.getElementById("output").textContent;
         navigator.clipboard.writeText(text);
-        alert("Text copiat!");
+        alert("Text copied!");
     }
 
     function clearAll() {
         document.getElementById("input").value = "";
-        document.getElementById("output").textContent = "Text eliminat..";
+        document.getElementById("output").textContent = "Text cleared...";
+    }
+
+    function goHome() {
+        window.location.href = 'index.html';
     }
 </script>
 
