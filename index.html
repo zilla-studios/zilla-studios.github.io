@@ -1,224 +1,319 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Zilla Studios</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Discordttus</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="logo.png">
 
 <style>
-* {
+html, body {
+    height: 100%;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Orbitron', sans-serif;
 }
 
 body {
-    min-height: 100vh;
-    background: linear-gradient(270deg, #0a0a0a, #141414, #1b1b1b);
-    background-size: 400% 400%;
-    animation: bgMove 15s ease infinite;
-    color: #e0e0e0;
-    overflow: hidden;
-}
+    background: url('text.png');
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
 
-@keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Particule */
-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-}
-
-/* Layout principal */
-.main {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    height: 100vh;
-    padding: 40px;
-}
-
-/* STÂNGA – Discord */
-.left {
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding-left: 70px;      /* mai în dreapta */
-    padding-bottom: 120px;  /* mai sus */
-}
-
-.discord-box {
-    backdrop-filter: blur(20px);
-    background: rgba(18, 18, 18, 0.9);
-    border-radius: 26px;
-    padding: 18px;
-    box-shadow: 0 0 40px rgba(20, 120, 80, 0.65);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.discord-box:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 65px rgba(31, 163, 106, 0.95);
-}
-
-/* DREAPTA – Text */
-.right {
-    flex: 1;
     display: flex;
     flex-direction: column;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    background: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    border-bottom: 1px solid #1a1a1a;
+    z-index: 1000;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-left img { height: 42px; }
+.nav-left span {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nav-center {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-center a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    animation: underline 0.3s;
+    position: relative;
+}
+
+.nav-right a {
+    padding: 8px 15px;
+    background: #00ff66;
+    color: #000000;
+    border-radius: 10px;
+    font-weight: 600;
+    gap: 10px;
+    align-items: center;
+    display: flex;
+    
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 30px;
+}
+
+.nav-right a:hover {
+    background: #00cc52;
+    color: #000000;
+}
+
+@keyframes move-status {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+.status-bar { 
+    position: fixed; 
+    top: 70px; 
+    width: 100%; 
+    background-color: #292b29;
+     color: white; 
+     padding: 8px 0; 
+     text-align: center; 
+     font-size: 0.9rem; font-weight: bold; 
+     z-index: 999; } 
+
+     .status-bar-text { 
+        animation: move-status 15s infinite linear; 
+        display: inline-block; 
+        white-space: nowrap; }
+
+#mainContent {
+    flex: 1;
+    padding-top: 120px;
+}
+
+.hero {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    text-shadow: 0 0 20px #717272;
+}
+
+.hero p {
+    color: #aaa;
+}
+
+footer {
+    background-color: #000000;
+     padding: 40px 20px 20px;
+     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #00ff66;
+        }
+
+.features {
+    width: 100%;
+    display: flex;
     justify-content: center;
-    padding-left: 60px;
+    margin: 100px 0;
 }
 
-.right h1 {
-    font-size: 46px;
-    margin-bottom: 22px;
-    color: #1fa36a;
-    text-shadow: 0 0 14px rgba(31, 163, 106, 0.55);
+.features-grid {
+    width: 90%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
 }
 
-.right p {
+.feature-card {
+    background-image: url('text.png');
+    border-radius: 20px;
+    border: 1px solid #1a1a1a;
+    aspect-ratio: 1 / 1; /* pătrat perfect */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    transition: 0.3s;
+}
+
+.feature-card i {
+    font-size: 36px;
+    color: #00ff66;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    margin: 10px 0;
     font-size: 18px;
-    line-height: 1.8;
-    color: #c2c2c2;
-    max-width: 520px;
 }
 
-/* Responsive */
+.feature-card p {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.5;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px rgba(0,255,102,0.3);
+}
+
+/* RESPONSIVE */
 @media (max-width: 900px) {
-    .main {
-        flex-direction: column;
-    }
-
-    .left {
-        justify-content: center;
-        padding: 0;
-        margin-bottom: 40px;
-    }
-
-    .right {
-        padding-left: 0;
-        align-items: center;
-        text-align: center;
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
+
+@media (max-width: 600px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #00ff66;
+}
+
+
+    
 </style>
 </head>
+
 <body>
 
-<canvas id="particles"></canvas>
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="logo.png">
+        <span>ZILLA STUDIOS</span>
+    </div>
+    <div class="nav-center">
+        <a href="index.html">Home</a>
+        <a href="#">About soon!</a>
+        <a href="tools.html">Tools</a>
+        <a href="https://discord.gg/mdHbGSnVfg">Contact</a>
+        <a href="#">Portfolio soon!</a>
+    </div>
+    <div class="nav-right">
+        <a href="https://discord.gg/mdHbGSnVfg">Join Discord</a>
+    </div>
+</nav>
 
-<div class="main">
-    <!-- STÂNGA -->
-    <div class="left">
-        <div class="discord-box">
-            <iframe 
-                src="https://discord.com/widget?id=1391374367782342656&theme=dark"
-                width="420"
-                height="600"
-                allowtransparency="true"
-                frameborder="0"
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-            </iframe>
-        </div>
+<div class="status-bar">
+        <span class="status-bar-text">
+            New to Zilla Studios? Check out our Tools section for useful utilities!
+        </span>
     </div>
 
-    <!-- DREAPTA -->
-    <div class="right">
-        <h1>SCRIE TITLUL AICI</h1>
-        <p>
-            Aici îți pui tu textul.<br><br>
-            Status, descriere, mesaj pentru server,
-            vibe personal, reguli, lore sau ce vrei tu.
-            Textul e liber, îl modifici direct din HTML.
-        </p>
-    </div>
+<div id="mainContent">
+    <section class="hero">
+        <h1>ZILLA STUDIOS</h1>
+        <p>Digital power. Creative domination.</p>
+    </section>
 </div>
 
-<script>
-/* Particule */
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+<section class="features">
+    <div class="features-grid">
 
-let particles = [];
+        <div class="feature-card">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>Fast Tools</h3>
+            <p>Optimized for performance and speed.</p>
+        </div>
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.vx = Math.random() * 0.4 - 0.2;
-        this.vy = Math.random() * 0.4 - 0.2;
-    }
-    move() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-    }
-    draw() {
-        ctx.fillStyle = 'rgba(31,163,106,0.35)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
+        <div class="feature-card">
+            <i class="fa-solid fa-code"></i>
+            <h3>Clean Code</h3>
+            <p>Clean, easy to modify and scale code.</p>
+        </div>
 
-function init() {
-    particles = [];
-    for (let i = 0; i < 90; i++) {
-        particles.push(new Particle());
-    }
-}
+        <div class="feature-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Secure</h3>
+            <p>High security for your projects.</p>
+        </div>
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-        p.move();
-        p.draw();
-    });
-    requestAnimationFrame(animate);
-}
+        <div class="feature-card">
+            <i class="fa-solid fa-palette"></i>
+            <h3>Modern Design</h3>
+            <p>Modern, dark design perfect for creators.</p>
+        </div>
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init();
-});
+        <div class="feature-card">
+            <i class="fa-solid fa-rocket"></i>
+            <h3>Scalable</h3>
+            <p>Projects that grow with you.</p>
+        </div>
 
-init();
-animate();
-</script>
+        <div class="feature-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>Community</h3>
+            <p>Designed for active communities.</p>
+        </div>
 
-<!-- WIDGET BOT – CRATE -->
-<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3"></script>
-<script>
-  const crateInterval = setInterval(() => {
-    if (window.Crate) {
-      clearInterval(crateInterval);
+    </div>
+</section>
 
-      new Crate({
-        server: '1391374367782342656',
-        color: '#1fa36a',
-        location: ['left', 'bottom'],
-        notifications: true
-      });
-    }
-  }, 100);
-</script>
-
+<footer>
+        <div class="footer-links" style="margin-bottom: 15px;">
+            <a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="portofolio.html" target="_blank">Portofolio</a>
+        </div>
+        <p style="margin-bottom: 5px;">&copy; 2026 Zilla Studios. All Rights Reserved</p>
+        <p class="made-by">
+            Design & Code by <a href="https://github.com/zilla-studios" target="_blank">r4duu</a>
+        </p>
+    </footer>
 
 </body>
 </html>
